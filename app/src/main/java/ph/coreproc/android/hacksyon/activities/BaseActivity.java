@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.activities;
+package ph.coreproc.android.hacksyon.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.ButterKnife;
-import ph.coreproc.android.kitchenmaterial.R;
+import ph.coreproc.android.hacksyon.R;
 
 /**
  * Created by johneris on 6/1/2015.

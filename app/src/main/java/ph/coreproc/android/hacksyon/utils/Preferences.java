@@ -1,9 +1,9 @@
-package ph.coreproc.android.kitchenmaterial.utils;
+package ph.coreproc.android.hacksyon.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import ph.coreproc.android.kitchenmaterial.rest.RestClient;
+import ph.coreproc.android.hacksyon.rest.RestClient;
 
 /**
  * Created by johneris on 6/16/2015.

@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.activities;
+package ph.coreproc.android.hacksyon.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import ph.coreproc.android.kitchenmaterial.R;
+import ph.coreproc.android.hacksyon.R;
 
 /**
  * Created by johneris on 6/16/2015.

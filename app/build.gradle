@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 // Version Info
-def versionMajor = 1    // backward compatibility
-def versionMinor = 0    // new feature or a major behavior change
+def versionMajor = 0    // backward compatibility
+def versionMinor = 1    // new feature or a major behavior change
 def versionPatch = 0    // fixes
 
 android {
@@ -10,7 +10,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "ph.coreproc.android.kitchenmaterial"
+        applicationId "ph.coreproc.android.hacksyon"
 
         minSdkVersion 15
         targetSdkVersion 22

@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.activities;
+package ph.coreproc.android.hacksyon.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,11 +15,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import ph.coreproc.android.kitchenmaterial.R;
-import ph.coreproc.android.kitchenmaterial.adapters.RVContributorAdapter;
-import ph.coreproc.android.kitchenmaterial.fragments.ExampleFragment;
-import ph.coreproc.android.kitchenmaterial.models.Contributor;
-import ph.coreproc.android.kitchenmaterial.rest.RestClient;
+import ph.coreproc.android.hacksyon.R;
+import ph.coreproc.android.hacksyon.adapters.RVContributorAdapter;
+import ph.coreproc.android.hacksyon.fragments.ExampleFragment;
+import ph.coreproc.android.hacksyon.models.Contributor;
+import ph.coreproc.android.hacksyon.rest.RestClient;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

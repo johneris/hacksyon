@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.rest;
+package ph.coreproc.android.hacksyon.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

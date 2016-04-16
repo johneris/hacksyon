@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.fragments;
+package ph.coreproc.android.hacksyon.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
-import ph.coreproc.android.kitchenmaterial.R;
+import ph.coreproc.android.hacksyon.R;
 
 /**
  * Created by johneris on 6/15/2015.

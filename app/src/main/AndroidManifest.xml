@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ph.coreproc.android.kitchenmaterial">
+    package="ph.coreproc.android.hacksyon">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
-        android:name=".App"
+        android:name="ph.coreproc.android.hacksyon.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -26,7 +26,7 @@
         <!--ActiveAndroid-->
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name="ph.coreproc.android.hacksyon.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,16 +36,16 @@
         </activity>
 
         <activity
-            android:name=".activities.ExampleActivity"
+            android:name="ph.coreproc.android.hacksyon.activities.ExampleActivity"
             android:label="@string/activity_title_example"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="ph.coreproc.android.hacksyon.activities.LoginActivity"
             android:label="@string/activity_title_login"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activities.DrawerActivity"/>
+        <activity android:name="ph.coreproc.android.hacksyon.activities.DrawerActivity"/>
 
     </application>
 

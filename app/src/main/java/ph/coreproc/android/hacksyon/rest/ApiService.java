@@ -1,8 +1,8 @@
-package ph.coreproc.android.kitchenmaterial.rest;
+package ph.coreproc.android.hacksyon.rest;
 
 import java.util.List;
 
-import ph.coreproc.android.kitchenmaterial.models.Contributor;
+import ph.coreproc.android.hacksyon.models.Contributor;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;

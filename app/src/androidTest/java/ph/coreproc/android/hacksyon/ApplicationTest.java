@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial;
+package ph.coreproc.android.hacksyon;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

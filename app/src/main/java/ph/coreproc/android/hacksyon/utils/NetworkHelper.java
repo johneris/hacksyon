@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial.utils;
+package ph.coreproc.android.hacksyon.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

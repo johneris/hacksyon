@@ -1,4 +1,4 @@
-package ph.coreproc.android.kitchenmaterial;
+package ph.coreproc.android.hacksyon;
 
 /**
  * Created by johneris on 6/5/2015.

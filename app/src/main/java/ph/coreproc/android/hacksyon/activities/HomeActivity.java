@@ -84,6 +84,14 @@ public class HomeActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        mChatbotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChatbotActivity.newIntent(mContext);
+                startActivity(intent);
+            }
+        });
     }
 
 

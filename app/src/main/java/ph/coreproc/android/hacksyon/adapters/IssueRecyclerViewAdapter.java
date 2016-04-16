@@ -20,10 +20,12 @@ import ph.coreproc.android.hacksyon.models.IssueResponseModel;
 /**
  * Created by johneris on 6/8/2015.
  */
-public class IssueRecyclerViewAdapter extends RecyclerView.Adapter<IssueRecyclerViewAdapter.IssueViewHolder> {
+public abstract class IssueRecyclerViewAdapter extends RecyclerView.Adapter<IssueRecyclerViewAdapter.IssueViewHolder> {
 
     List<IssueResponseModel> mIssueResponseModels;
     private Context mContext;
+
+    public abstract void onIssueClicked(IssueResponseModel issueResponseModel);
 
     public IssueRecyclerViewAdapter(Context context, List<IssueResponseModel> issueResponseModels) {
         mContext = context;
@@ -40,8 +42,14 @@ public class IssueRecyclerViewAdapter extends RecyclerView.Adapter<IssueRecycler
     @Override
     public void onBindViewHolder(IssueViewHolder holder, int position) {
         final IssueResponseModel issueResponseModel = mIssueResponseModels.get(position);
-        holder.mIssueTextView.setText(issueResponseModel.issue);
+        holder.mIssueTextView.setText(issueResponseModel.shortName);
         holder.mResultContainer.setVisibility(View.GONE);
+        holder.mMainContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onIssueClicked(issueResponseModel);
+            }
+        });
     }
 
     @Override

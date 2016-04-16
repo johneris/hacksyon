@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
-                    tools:src="@drawable/ic_candidate_santiago"/>
+                    android:src="@drawable/ic_question_mark"/>
 
             </FrameLayout>
 
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:background="@color/accent"
+            android:background="@color/primary_light"
             android:orientation="vertical"
             android:padding="@dimen/spacing_small">
 
@@ -110,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
-                    tools:src="@drawable/ic_candidate_santiago"/>
+                    android:src="@drawable/ic_question_mark"/>
 
             </FrameLayout>
 
@@ -119,7 +119,7 @@
                 style="@style/Button.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:text="Change"/>
 
@@ -134,7 +134,7 @@
         android:layout_marginRight="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
         android:gravity="center"
-        android:text="Click the issues and find out\nwhich candidate you mostly agree with"/>
+        android:text="Select an issue and find out\nwhich candidate best matches your stand"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/issuesRecyclerView"

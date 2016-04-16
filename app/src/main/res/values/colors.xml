@@ -26,9 +26,9 @@
     <color name="independent">#607D8B</color>
     <color name="independent_light">#78909C</color>
 
-    <color name="button_candidates_color">#43A047</color>
-    <color name="button_findmymatch_color">#F44336</color>
-    <color name="button_chatbot_color">#795548</color>
+    <color name="button_candidates_color">#FFCA28</color>
+    <color name="button_findmymatch_color">#1565C0</color>
+    <color name="button_chatbot_color">#E53935</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

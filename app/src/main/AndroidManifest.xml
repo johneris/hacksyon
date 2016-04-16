@@ -49,6 +49,9 @@
             android:name="ph.coreproc.android.hacksyon.activities.FindMyMatchActivity"
             android:label="Find My Match"/>
 
+        <activity
+            android:name="ph.coreproc.android.hacksyon.activities.IssueCandidateMatchActivity"/>
+
     </application>
 
 </manifest>

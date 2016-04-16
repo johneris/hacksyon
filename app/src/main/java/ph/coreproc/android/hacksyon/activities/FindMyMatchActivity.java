@@ -34,6 +34,8 @@ public class FindMyMatchActivity extends BaseActivity {
         return intent;
     }
 
+    private final int REQUEST_CODE_ISSUE_CANDIDATE = 1;
+
     @Bind(R.id.matchCandidateBackgroundImageView)
     CircleImageView mMatchCandidateBackgroundImageView;
 
@@ -82,7 +84,13 @@ public class FindMyMatchActivity extends BaseActivity {
 
         List<IssueResponseModel> issueResponseModels = new ArrayList<>();
 
-        mIssueRecyclerViewAdapter = new IssueRecyclerViewAdapter(mContext, issueResponseModels);
+        mIssueRecyclerViewAdapter = new IssueRecyclerViewAdapter(mContext, issueResponseModels) {
+            @Override
+            public void onIssueClicked(IssueResponseModel issueResponseModel) {
+                Intent intent = IssueCandidateMatchActivity.newIntent(mContext, issueResponseModel);
+                startActivityForResult(intent, REQUEST_CODE_ISSUE_CANDIDATE);
+            }
+        };
         mIssuesRecyclerView.setAdapter(mIssueRecyclerViewAdapter);
 
         getData();
@@ -107,6 +115,16 @@ public class FindMyMatchActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_ISSUE_CANDIDATE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String issueId = bundle.getString(IssueCandidateMatchActivity.RESULT_ISSUE_ID);
+            int rating = bundle.getInt(IssueCandidateMatchActivity.RESULT_RATING, 0);
+            String candidateId = bundle.getString(IssueCandidateMatchActivity.RESULT_CANDIDATE_ID);
+        }
     }
 
     @Override

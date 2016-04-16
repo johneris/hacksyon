@@ -20,4 +20,10 @@ public interface Candidate {
 
     String getDescription();
 
+    String getProfile();
+
+    String getAccomplishments();
+
+    String getCritizizedFor();
+
 }

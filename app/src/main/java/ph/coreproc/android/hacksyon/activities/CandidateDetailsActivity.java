@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,10 @@ public class CandidateDetailsActivity extends BaseActivity {
     private static String ARGS_NAME = "ARGS_NAME";
     private static String ARGS_DESCRIPTION = "ARGS_DESCRIPTION";
 
+    private static String ARGS_PROFILE = "ARGS_PROFILE";
+    private static String ARGS_ACCOMPLISHMENTS = "ARGS_ACCOMPLISHMENTS";
+    private static String ARGS_CRITIZIZED_FOR = "ARGS_CRITIZIZED_FOR";
+
     public static Intent newIntent(Context context, Candidate candidate) {
         Intent intent = new Intent(context, CandidateDetailsActivity.class);
         intent.putExtra(ARGS_ID, candidate.getId());
@@ -37,6 +42,9 @@ public class CandidateDetailsActivity extends BaseActivity {
         intent.putExtra(ARGS_COLOR_LIGHT, candidate.getColorLight());
         intent.putExtra(ARGS_NAME, candidate.getName());
         intent.putExtra(ARGS_DESCRIPTION, candidate.getDescription());
+        intent.putExtra(ARGS_PROFILE, candidate.getProfile());
+        intent.putExtra(ARGS_ACCOMPLISHMENTS, candidate.getAccomplishments());
+        intent.putExtra(ARGS_CRITIZIZED_FOR, candidate.getCritizizedFor());
         return intent;
     }
 
@@ -58,6 +66,15 @@ public class CandidateDetailsActivity extends BaseActivity {
     @Bind(R.id.candidateDescriptionTextView)
     TextView mCandidateDescriptionTextView;
 
+    @Bind(R.id.profileDescriptionTextView)
+    TextView mProfileDescriptionTextView;
+
+    @Bind(R.id.accomplishmentsDescriptionTextView)
+    TextView mAccomplishmentsDescriptionTextView;
+
+    @Bind(R.id.critizedForDescriptionTextView)
+    TextView mCritizedForDescriptionTextView;
+
 
     @Bind(R.id.candidateBackgroundImageView)
     CircleImageView mCandidateBackgroundImageView;
@@ -71,6 +88,9 @@ public class CandidateDetailsActivity extends BaseActivity {
     private int mCandidateColorLight;
     private String mCandidateName;
     private String mCandidateDescription;
+    private String mCandidateProfile;
+    private String mCandidateAccomplishments;
+    private String mCandidateCritizizedFor;
 
     @Override
     protected int getLayoutResourceId() {
@@ -88,6 +108,9 @@ public class CandidateDetailsActivity extends BaseActivity {
         mCandidateColorLight = bundle.getInt(ARGS_COLOR_LIGHT);
         mCandidateName = bundle.getString(ARGS_NAME);
         mCandidateDescription = bundle.getString(ARGS_DESCRIPTION);
+        mCandidateProfile = bundle.getString(ARGS_PROFILE);
+        mCandidateAccomplishments = bundle.getString(ARGS_ACCOMPLISHMENTS);
+        mCandidateCritizizedFor = bundle.getString(ARGS_CRITIZIZED_FOR);
 
         initUI();
     }
@@ -102,6 +125,10 @@ public class CandidateDetailsActivity extends BaseActivity {
         mCandidateImageView.setImageResource(mCandidateImage);
         mCandidateBackgroundImageView.setImageResource(mCandidateColor);
         mSunImageView.setColorFilter(ContextCompat.getColor(mContext, mCandidateColorLight));
+
+        mProfileDescriptionTextView.setText(Html.fromHtml(mCandidateProfile));
+        mAccomplishmentsDescriptionTextView.setText(mCandidateAccomplishments);
+        mCritizedForDescriptionTextView.setText(mCandidateCritizizedFor);
     }
 
     @Override

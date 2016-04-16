@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:background="@color/primary"
+            android:background="@color/primary_light"
             android:orientation="vertical"
             android:padding="@dimen/spacing_small">
 
@@ -47,6 +47,31 @@
                     tools:src="@drawable/ic_candidate_santiago"/>
 
             </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Match Score:"
+                    android:textColor="@color/white"
+                    android:textStyle="italic"/>
+
+                <TextView
+                    android:id="@+id/matchScoreTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:text="\?\?\?"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -88,12 +113,32 @@
             </FrameLayout>
 
             <Button
+                android:id="@+id/changeVoteButton"
+                style="@style/Button.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:text="Change"/>
 
         </LinearLayout>
-
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:gravity="center"
+        android:text="Click the issues and find out\nwhich candidate you mostly agree with"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/issuesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_weight="1"/>
 
 </LinearLayout>

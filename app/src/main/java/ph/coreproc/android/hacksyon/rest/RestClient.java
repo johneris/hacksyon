@@ -15,8 +15,8 @@ public class RestClient {
         LIVE, DEV
     }
 
-    private static final String BASE_URL_LIVE = "https://api.github.com";
-    private static final String BASE_URL_DEV = "https://api.github.com";
+    private static final String BASE_URL_LIVE = "http://api.bilangpilipino.com/api-bilang-pilipino/api";
+    private static final String BASE_URL_DEV = "http://api.bilangpilipino.com/api-bilang-pilipino/api";
     private static BaseUrlMode baseUrlMode;
 
     private static ApiService apiService;

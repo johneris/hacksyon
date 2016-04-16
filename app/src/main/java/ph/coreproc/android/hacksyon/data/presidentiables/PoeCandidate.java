@@ -10,7 +10,7 @@ public class PoeCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 4;
     }
 
     @Override

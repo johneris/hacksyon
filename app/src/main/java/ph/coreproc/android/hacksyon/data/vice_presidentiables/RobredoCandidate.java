@@ -10,7 +10,7 @@ public class RobredoCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 11;
     }
 
     @Override

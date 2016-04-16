@@ -10,7 +10,7 @@ public class HonasanCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 9;
     }
 
     @Override

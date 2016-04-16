@@ -10,7 +10,7 @@ public class DuterteCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 3;
     }
 
     @Override

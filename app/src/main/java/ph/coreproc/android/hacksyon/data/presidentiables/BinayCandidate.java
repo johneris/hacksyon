@@ -10,7 +10,7 @@ public class BinayCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 1;
     }
 
     @Override

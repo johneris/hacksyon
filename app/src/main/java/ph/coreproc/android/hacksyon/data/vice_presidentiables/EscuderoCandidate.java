@@ -10,7 +10,7 @@ public class EscuderoCandidate implements Candidate {
 
     @Override
     public int getId() {
-        return 0;
+        return 8;
     }
 
     @Override

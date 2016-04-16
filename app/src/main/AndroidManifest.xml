@@ -41,6 +41,10 @@
             android:name="ph.coreproc.android.hacksyon.activities.CandidatesActivity"
             android:label="Candidates"/>
 
+        <activity
+            android:name="ph.coreproc.android.hacksyon.activities.CandidateDetailsActivity"
+            android:label="Candidate Details"/>
+
     </application>
 
 </manifest>

@@ -42,6 +42,13 @@ public class VicePresidentiablesFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mContext = context;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidates, container, false);
 
@@ -49,8 +56,6 @@ public class VicePresidentiablesFragment extends Fragment {
 
         ButterKnife.bind(this, view);
         initialize();
-
-        mContext = getActivity();
 
         return view;
     }

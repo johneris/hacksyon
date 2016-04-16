@@ -22,4 +22,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Title.Candidate" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#FFF</item>
+    </style>
+    <style name="Title.Candidate.Expanded" parent="Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="Title.Candidate.collapsed" parent="Title">
+        <item name="android:textSize">@dimen/abc_text_size_title_material_toolbar</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -1,6 +1,7 @@
 package ph.coreproc.android.hacksyon.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ph.coreproc.android.hacksyon.R;
+import ph.coreproc.android.hacksyon.activities.CandidateDetailsActivity;
 import ph.coreproc.android.hacksyon.models.Candidate;
 
 /**
@@ -38,7 +40,7 @@ public class CandidateRecyclerViewAdapter extends RecyclerView.Adapter<Candidate
 
     @Override
     public void onBindViewHolder(CandidateViewHolder holder, int position) {
-        Candidate candidate = mCandidates.get(position);
+        final Candidate candidate = mCandidates.get(position);
         holder.mCandidateImageView.setImageResource(candidate.getImage());
         holder.mCandidateBackgroundImageView.setImageResource(candidate.getColor());
         holder.mCandidateNameTextView.setText(candidate.getName());
@@ -46,7 +48,8 @@ public class CandidateRecyclerViewAdapter extends RecyclerView.Adapter<Candidate
         holder.mMainContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = CandidateDetailsActivity.newIntent(mContext, candidate);
+                mContext.startActivity(intent);
             }
         });
     }

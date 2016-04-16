@@ -53,7 +53,8 @@
             android:name="ph.coreproc.android.hacksyon.activities.IssueCandidateMatchActivity"/>
 
         <activity
-            android:name="ph.coreproc.android.hacksyon.activities.ChatbotActivity"/>
+            android:name="ph.coreproc.android.hacksyon.activities.ChatbotActivity"
+            android:label="Juan Bot"/>
 
     </application>
 

@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import ph.coreproc.android.hacksyon.R;
 
@@ -88,7 +91,11 @@ public class HomeActivity extends BaseActivity {
         mChatbotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ChatbotActivity.newIntent(mContext);
+                List<String> messages = new ArrayList<String>();
+                messages.add("Hiasdfasdfasdfasd 1");
+                messages.add("Hiasdfasdfasdfasd 2");
+                messages.add("Hiasdfasdfasdfasd 3");
+                Intent intent = ChatbotActivity.newIntent(mContext, "Topicsszzzxx", messages);
                 startActivity(intent);
             }
         });

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
@@ -24,11 +26,32 @@ public class ChatbotActivity extends BaseActivity {
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, ChatbotActivity.class);
+        intent.putExtra(ARGS_IS_FOR_TOPIC_DISCUSSION, false);
+        return intent;
+    }
+
+    private static String ARGS_IS_FOR_TOPIC_DISCUSSION = "ARGS_IS_FOR_TOPIC_DISCUSSION";
+
+    private static String ARGS_TOPIC = "ARGS_TOPIC";
+    private static String ARGS_DETAILS = "ARGS_DETAILS";
+
+    public static Intent newIntent(Context context, String topic, List<String> details) {
+        Intent intent = new Intent(context, ChatbotActivity.class);
+        intent.putExtra(ARGS_IS_FOR_TOPIC_DISCUSSION, true);
+        intent.putExtra(ARGS_TOPIC, topic);
+        CharSequence[] detailsToPass = new CharSequence[details.size()];
+        for (int i = 0; i < details.size(); i++) {
+            detailsToPass[i] = details.get(i);
+        }
+        intent.putExtra(ARGS_DETAILS, detailsToPass);
         return intent;
     }
 
     @Bind(R.id.messageRecyclerView)
     RecyclerView mMessageRecyclerView;
+
+    @Bind(R.id.okButton)
+    Button mOkButton;
 
     ChatMessageRecyclerViewAdapter mChatMessageRecyclerViewAdapter;
 
@@ -37,9 +60,25 @@ public class ChatbotActivity extends BaseActivity {
         return R.layout.activity_chatbot;
     }
 
+    private boolean mIsForTopicDiscussion;
+    private String mTopic = "";
+    private List<String> mDetails = new ArrayList<>();
+
+    private boolean willShowOkButton = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getIntent().getExtras();
+        mIsForTopicDiscussion = bundle.getBoolean(ARGS_IS_FOR_TOPIC_DISCUSSION);
+        if (mIsForTopicDiscussion) {
+            mTopic = bundle.getString(ARGS_TOPIC);
+            CharSequence[] details = bundle.getCharSequenceArray(ARGS_DETAILS);
+            for (CharSequence detail : details) {
+                mDetails.add(detail.toString());
+            }
+        }
 
         initUI();
     }
@@ -55,10 +94,49 @@ public class ChatbotActivity extends BaseActivity {
 
         List<MessageModel> messageModels = new ArrayList<>();
 
-        mChatMessageRecyclerViewAdapter = new ChatMessageRecyclerViewAdapter(mContext, messageModels);
+        mChatMessageRecyclerViewAdapter = new ChatMessageRecyclerViewAdapter(mContext, messageModels) {
+            @Override
+            public void allLoadingFinished() {
+                if (willShowOkButton) {
+                    mOkButton.setVisibility(View.VISIBLE);
+                }
+                willShowOkButton = false;
+            }
+        };
         mMessageRecyclerView.setAdapter(mChatMessageRecyclerViewAdapter);
 
-        mChatMessageRecyclerViewAdapter.add(new MessageModel(MessageSenderEnum.BOT, "Hi"));
+        mOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOkButton.setVisibility(View.INVISIBLE);
+                addMessage(new MessageModel(MessageSenderEnum.USER, "OK"));
+                discuss();
+            }
+        });
+
+        if (mIsForTopicDiscussion) {
+            addMessage(new MessageModel(MessageSenderEnum.BOT, "Hi, Let's talk about " + mTopic));
+            showOkButton();
+        }
+    }
+
+    private void discuss() {
+        if (mDetails.isEmpty()) {
+            addMessage(new MessageModel(MessageSenderEnum.BOT, "That's all I know. Thanks for your time! :)"));
+            return;
+        }
+        String message = mDetails.get(0);
+        mDetails.remove(0);
+        addMessage(new MessageModel(MessageSenderEnum.BOT, message));
+        showOkButton();
+    }
+
+    private void showOkButton() {
+        willShowOkButton = true;
+    }
+
+    private void addMessage(MessageModel messageModel) {
+        mChatMessageRecyclerViewAdapter.add(messageModel);
         mMessageRecyclerView.smoothScrollToPosition(mChatMessageRecyclerViewAdapter.getItemCount()-1);
     }
 

@@ -3,6 +3,7 @@ package ph.coreproc.android.hacksyon.adapters;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,13 @@ import ph.coreproc.android.hacksyon.models.MessageSenderEnum;
 /**
  * Created by johneris on 6/8/2015.
  */
-public class ChatMessageRecyclerViewAdapter extends RecyclerView.Adapter<ChatMessageRecyclerViewAdapter.MessageViewHolder> {
+public abstract class ChatMessageRecyclerViewAdapter extends RecyclerView.Adapter<ChatMessageRecyclerViewAdapter.MessageViewHolder> {
 
     List<MessageModel> mMessageModels;
     List<Boolean> mIsMessageLoaded;
     private Context mContext;
+
+    public abstract void allLoadingFinished();
 
     public ChatMessageRecyclerViewAdapter(Context context, List<MessageModel> messageModels) {
         mContext = context;
@@ -52,16 +55,26 @@ public class ChatMessageRecyclerViewAdapter extends RecyclerView.Adapter<ChatMes
     @Override
     public void onBindViewHolder(final MessageViewHolder holder, final int position) {
         final MessageModel messageModel = mMessageModels.get(position);
-        if (mIsMessageLoaded.get(position)) {
+        if (mIsMessageLoaded.get(position) || messageModel.messageSenderEnum == MessageSenderEnum.USER) {
             holder.mMessageTextView.setText(messageModel.message);
+            mIsMessageLoaded.set(position, true);
         } else {
             holder.mMessageTextView.setText(". . .");
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    holder.mMessageTextView.setText(messageModel.message);
+                    holder.mMessageTextView.setText(Html.fromHtml(messageModel.message));
                     mIsMessageLoaded.set(position, true);
+                    int counter = 0;
+                    for (boolean b : mIsMessageLoaded) {
+                        if (b) {
+                            counter++;
+                        }
+                    }
+                    if (counter == mIsMessageLoaded.size()) {
+                        allLoadingFinished();
+                    }
                 }
             }, 2000);
         }

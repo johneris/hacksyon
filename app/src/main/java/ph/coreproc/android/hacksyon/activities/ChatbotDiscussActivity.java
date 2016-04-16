@@ -22,10 +22,10 @@ import ph.coreproc.android.hacksyon.models.MessageSenderEnum;
 /**
  * Created by johneris on 4/16/16.
  */
-public class ChatbotActivity extends BaseActivity {
+public class ChatbotDiscussActivity extends BaseActivity {
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, ChatbotActivity.class);
+        Intent intent = new Intent(context, ChatbotDiscussActivity.class);
         intent.putExtra(ARGS_IS_FOR_TOPIC_DISCUSSION, false);
         return intent;
     }
@@ -36,7 +36,7 @@ public class ChatbotActivity extends BaseActivity {
     private static String ARGS_DETAILS = "ARGS_DETAILS";
 
     public static Intent newIntent(Context context, String topic, List<String> details) {
-        Intent intent = new Intent(context, ChatbotActivity.class);
+        Intent intent = new Intent(context, ChatbotDiscussActivity.class);
         intent.putExtra(ARGS_IS_FOR_TOPIC_DISCUSSION, true);
         intent.putExtra(ARGS_TOPIC, topic);
         CharSequence[] detailsToPass = new CharSequence[details.size()];

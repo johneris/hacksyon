@@ -20,6 +20,7 @@
             android:text="Select a topic for Juan Bot to discuss"/>
 
         <Button
+            android:id="@+id/povertyButton"
             style="@style/Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:text="Poverty"/>
 
         <Button
+            android:id="@+id/climateChangeButton"
             style="@style/Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +36,7 @@
             android:text="Climate Change"/>
 
         <Button
+            android:id="@+id/ofwButton"
             style="@style/Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

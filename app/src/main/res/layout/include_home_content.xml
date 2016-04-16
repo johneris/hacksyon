@@ -70,9 +70,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:text="The Candidates"
+                    android:text="Know more about the presidential and vice presidential candidates, including their prior experience, education, and more."
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -116,9 +117,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:text="Find My Match"
+                    android:text="Still undecided on who you're going to vote for? Take the quiz to find out which candidate is your ideal that best matches to your stance on political issues."
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -164,7 +166,8 @@
                     android:layout_marginTop="@dimen/spacing_xsmall"
                     android:text="ChatBot"
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

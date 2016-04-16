@@ -91,11 +91,7 @@ public class HomeActivity extends BaseActivity {
         mChatbotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> messages = new ArrayList<String>();
-                messages.add("Hiasdfasdfasdfasd 1");
-                messages.add("Hiasdfasdfasdfasd 2");
-                messages.add("Hiasdfasdfasdfasd 3");
-                Intent intent = ChatbotActivity.newIntent(mContext, "Topicsszzzxx", messages);
+                Intent intent = ChatbotTopicListActivity.newIntent(mContext);
                 startActivity(intent);
             }
         });

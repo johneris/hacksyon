@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,10 @@ public abstract class ChatMessageRecyclerViewAdapter extends RecyclerView.Adapte
 
     @Override
     public void onBindViewHolder(final MessageViewHolder holder, final int position) {
+        holder.mMessageTextView.setMovementMethod(LinkMovementMethod.getInstance());
         final MessageModel messageModel = mMessageModels.get(position);
         if (mIsMessageLoaded.get(position) || messageModel.messageSenderEnum == MessageSenderEnum.USER) {
-            holder.mMessageTextView.setText(messageModel.message);
+            holder.mMessageTextView.setText(Html.fromHtml(messageModel.message));
             mIsMessageLoaded.set(position, true);
         } else {
             holder.mMessageTextView.setText(". . .");

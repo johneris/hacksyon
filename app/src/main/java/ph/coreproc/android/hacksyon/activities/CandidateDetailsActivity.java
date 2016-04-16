@@ -8,8 +8,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import butterknife.Bind;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ph.coreproc.android.hacksyon.R;
 import ph.coreproc.android.hacksyon.models.Candidate;
 
@@ -18,8 +20,19 @@ import ph.coreproc.android.hacksyon.models.Candidate;
  */
 public class CandidateDetailsActivity extends BaseActivity {
 
+    private static String ARGS_ID = "ARGS_ID";
+    private static String ARGS_IMAGE = "ARGS_IMAGE";
+    private static String ARGS_COLOR = "ARGS_COLOR";
+    private static String ARGS_NAME = "ARGS_NAME";
+    private static String ARGS_DESCRIPTION = "ARGS_DESCRIPTION";
+
     public static Intent newIntent(Context context, Candidate candidate) {
         Intent intent = new Intent(context, CandidateDetailsActivity.class);
+        intent.putExtra(ARGS_ID, candidate.getId());
+        intent.putExtra(ARGS_IMAGE, candidate.getImage());
+        intent.putExtra(ARGS_COLOR, candidate.getColor());
+        intent.putExtra(ARGS_NAME, candidate.getName());
+        intent.putExtra(ARGS_DESCRIPTION, candidate.getDescription());
         return intent;
     }
 
@@ -35,6 +48,22 @@ public class CandidateDetailsActivity extends BaseActivity {
     @Bind(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
 
+    @Bind(R.id.candidateDescriptionTextView)
+    TextView mCandidateDescriptionTextView;
+
+
+    @Bind(R.id.candidateBackgroundImageView)
+    CircleImageView mCandidateBackgroundImageView;
+
+    @Bind(R.id.candidateImageView)
+    CircleImageView mCandidateImageView;
+
+    private int mCandidateId;
+    private int mCandidateImage;
+    private int mCandidateColor;
+    private String mCandidateName;
+    private String mCandidateDescription;
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_candidate_details;
@@ -44,13 +73,23 @@ public class CandidateDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle bundle = getIntent().getExtras();
+        mCandidateId = bundle.getInt(ARGS_ID);
+        mCandidateImage = bundle.getInt(ARGS_IMAGE);
+        mCandidateColor = bundle.getInt(ARGS_COLOR);
+        mCandidateName = bundle.getString(ARGS_NAME);
+        mCandidateDescription = bundle.getString(ARGS_DESCRIPTION);
+
         initUI();
     }
 
     private void initUI() {
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
-        mCollapsingToolbar.setTitle(getResources().getString(R.string.app_name));
+        mCollapsingToolbar.setTitle(mCandidateName);
+        mCandidateDescriptionTextView.setText(mCandidateDescription);
+        mCandidateImageView.setImageResource(mCandidateImage);
+        mCandidateBackgroundImageView.setImageResource(mCandidateColor);
     }
 
     @Override

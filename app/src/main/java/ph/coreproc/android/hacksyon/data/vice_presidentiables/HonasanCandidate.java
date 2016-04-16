@@ -25,7 +25,7 @@ public class HonasanCandidate implements Candidate {
 
     @Override
     public String getName() {
-        return "Gregorio \"Gringo\" Honasan";
+        return "Gregorio Honasan";
     }
 
     @Override

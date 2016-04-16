@@ -3,6 +3,7 @@
     android:id="@+id/coordinator_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -52,26 +53,27 @@
                         android:id="@+id/candidateBackgroundImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@color/accent"/>
+                        tools:src="@color/accent"/>
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/candidateImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
-                        android:src="@drawable/ic_candidate_santiago"/>
+                        tools:src="@drawable/ic_candidate_santiago"/>
 
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/candidateDescriptionTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="56dp"
                     android:layout_marginLeft="120dp"
-                    android:textStyle="italic"
+                    android:text=""
                     android:textColor="@color/white"
-                    android:text="Desc"/>
+                    android:textStyle="italic"/>
 
             </FrameLayout>
 

@@ -25,7 +25,7 @@ public class MarcosCandidate implements Candidate {
 
     @Override
     public String getName() {
-        return "Ferdinand \"Bongbong\" Marcos Jr.";
+        return "Ferdinand Marcos Jr.";
     }
 
     @Override

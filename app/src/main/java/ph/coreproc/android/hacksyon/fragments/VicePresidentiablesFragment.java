@@ -17,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ph.coreproc.android.hacksyon.R;
 import ph.coreproc.android.hacksyon.adapters.CandidateRecyclerViewAdapter;
-import ph.coreproc.android.hacksyon.data.presidentiables.SantiagoCandidate;
+import ph.coreproc.android.hacksyon.data.vice_presidentiables.VicePresidentiableEnum;
 import ph.coreproc.android.hacksyon.models.Candidate;
 
 /**
@@ -68,10 +68,9 @@ public class VicePresidentiablesFragment extends Fragment {
         mRecyclerView.setHasFixedSize(false);
 
         List<Candidate> candidates = new ArrayList<>();
-        candidates.add(new SantiagoCandidate());
-        candidates.add(new SantiagoCandidate());
-        candidates.add(new SantiagoCandidate());
-        candidates.add(new SantiagoCandidate());
+        for (VicePresidentiableEnum vp : VicePresidentiableEnum.values()) {
+            candidates.add(vp.getObject());
+        }
 
         CandidateRecyclerViewAdapter candidateRecyclerViewAdapter = new CandidateRecyclerViewAdapter(mContext, candidates);
         mRecyclerView.setAdapter(candidateRecyclerViewAdapter);

@@ -20,7 +20,12 @@ public class BinayCandidate implements Candidate {
 
     @Override
     public int getColor() {
-        return R.color.primary;
+        return R.color.binay;
+    }
+
+    @Override
+    public int getColorLight() {
+        return R.color.binay_light;
     }
 
     @Override

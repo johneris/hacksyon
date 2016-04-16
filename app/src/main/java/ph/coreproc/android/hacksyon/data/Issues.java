@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by johneris on 4/16/16.
  */
-public class Isuues {
+public class Issues {
 
     private static List<String> data;
 

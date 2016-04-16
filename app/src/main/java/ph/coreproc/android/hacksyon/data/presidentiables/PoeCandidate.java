@@ -20,7 +20,12 @@ public class PoeCandidate implements Candidate {
 
     @Override
     public int getColor() {
-        return R.color.primary;
+        return R.color.poe;
+    }
+
+    @Override
+    public int getColorLight() {
+        return R.color.poe_light;
     }
 
     @Override

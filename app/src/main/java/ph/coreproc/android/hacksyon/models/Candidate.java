@@ -1,5 +1,6 @@
 package ph.coreproc.android.hacksyon.models;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 
 /**
@@ -11,7 +12,9 @@ public interface Candidate {
 
     @DrawableRes int getImage();
 
-    int getColor();
+    @ColorRes int getColor();
+
+    @ColorRes int getColorLight();
 
     String getName();
 

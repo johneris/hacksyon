@@ -21,6 +21,9 @@ public class RestClient {
 
     private static ApiService apiService;
 
+    public static String KEY = "pP6I28KA6";
+    public static String TOKEN = "ccGwXFv9k9vO68igyXmPRvHiYrgp";
+
     static {
         setupRestClient(BASE_URL_DEV);
     }

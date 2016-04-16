@@ -20,7 +20,12 @@ public class MarcosCandidate implements Candidate {
 
     @Override
     public int getColor() {
-        return R.color.primary;
+        return R.color.santiago;
+    }
+
+    @Override
+    public int getColorLight() {
+        return R.color.santiago_light;
     }
 
     @Override

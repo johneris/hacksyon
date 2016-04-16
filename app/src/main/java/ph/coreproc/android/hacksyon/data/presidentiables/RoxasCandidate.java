@@ -20,7 +20,12 @@ public class RoxasCandidate implements Candidate {
 
     @Override
     public int getColor() {
-        return R.color.primary;
+        return R.color.roxas;
+    }
+
+    @Override
+    public int getColorLight() {
+        return R.color.roxas_light;
     }
 
     @Override

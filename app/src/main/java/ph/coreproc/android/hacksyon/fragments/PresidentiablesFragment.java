@@ -19,6 +19,7 @@ import ph.coreproc.android.hacksyon.R;
 import ph.coreproc.android.hacksyon.adapters.CandidateRecyclerViewAdapter;
 import ph.coreproc.android.hacksyon.data.presidentiables.PresidentiableEnum;
 import ph.coreproc.android.hacksyon.models.Candidate;
+import ph.coreproc.android.hacksyon.utils.DividerItemDecoration;
 
 /**
  * Created by johneris on 6/15/2015.
@@ -66,6 +67,10 @@ public class PresidentiablesFragment extends Fragment {
 
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(false);
+
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST)
+        );
 
         List<Candidate> candidates = new ArrayList<>();
         for (PresidentiableEnum p : PresidentiableEnum.values()) {

@@ -6,7 +6,7 @@ import ph.coreproc.android.hacksyon.models.Candidate;
 /**
  * Created by johneris on 4/16/16.
  */
-public class SantiagoCandidate implements Candidate {
+public class PoeCandidate implements Candidate {
 
     @Override
     public int getId() {
@@ -15,7 +15,7 @@ public class SantiagoCandidate implements Candidate {
 
     @Override
     public int getImage() {
-        return R.drawable.ic_candidate_santiago;
+        return R.drawable.ic_candidate_poe;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class SantiagoCandidate implements Candidate {
 
     @Override
     public String getName() {
-        return "Miriam Defensor Santiago";
+        return "Grace Poe";
     }
 
     @Override

@@ -6,7 +6,7 @@ import ph.coreproc.android.hacksyon.models.Candidate;
 /**
  * Created by johneris on 4/16/16.
  */
-public class SantiagoCandidate implements Candidate {
+public class DuterteCandidate implements Candidate {
 
     @Override
     public int getId() {
@@ -15,7 +15,7 @@ public class SantiagoCandidate implements Candidate {
 
     @Override
     public int getImage() {
-        return R.drawable.ic_candidate_santiago;
+        return R.drawable.ic_candidate_duterte;
     }
 
     @Override
@@ -25,11 +25,11 @@ public class SantiagoCandidate implements Candidate {
 
     @Override
     public String getName() {
-        return "Miriam Defensor Santiago";
+        return "Rodrigo Duterte";
     }
 
     @Override
     public String getDescription() {
-        return "Senator";
+        return "Davao City Mayor";
     }
 }

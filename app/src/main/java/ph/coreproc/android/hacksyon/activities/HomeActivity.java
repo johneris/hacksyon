@@ -7,6 +7,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -65,6 +66,14 @@ public class HomeActivity extends BaseActivity {
 
     private void initUI() {
         mCollapsingToolbar.setTitle(getResources().getString(R.string.app_name));
+
+        mCandidatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CandidatesActivity.newIntent(mContext);
+                startActivity(intent);
+            }
+        });
     }
 
 

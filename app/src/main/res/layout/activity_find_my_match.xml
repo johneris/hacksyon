@@ -134,7 +134,7 @@
         android:layout_marginRight="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
         android:gravity="center"
-        android:text="Select an issue and find out\nwhich candidate best matches your stand"/>
+        android:text="Select an issue and find out\nwhich candidate best matches your political views"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/issuesRecyclerView"

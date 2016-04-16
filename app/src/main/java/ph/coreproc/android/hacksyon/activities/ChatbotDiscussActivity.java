@@ -122,7 +122,7 @@ public class ChatbotDiscussActivity extends BaseActivity {
 
     private void discuss() {
         if (mDetails.isEmpty()) {
-            addMessage(new MessageModel(MessageSenderEnum.BOT, "That's all I know. Thanks for your time! :)"));
+            addMessage(new MessageModel(MessageSenderEnum.BOT, "I hope you learned something. Thanks for your time! :)"));
             return;
         }
         String message = mDetails.get(0);

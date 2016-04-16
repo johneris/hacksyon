@@ -14,6 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/myMatchContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
@@ -78,6 +79,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/myVoteContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"

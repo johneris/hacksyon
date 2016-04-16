@@ -1,6 +1,7 @@
 package ph.coreproc.android.hacksyon.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ph.coreproc.android.hacksyon.R;
+import ph.coreproc.android.hacksyon.activities.CandidateDetailsActivity;
 import ph.coreproc.android.hacksyon.adapters.CandidateRecyclerViewAdapter;
 import ph.coreproc.android.hacksyon.data.presidentiables.PresidentiableEnum;
 import ph.coreproc.android.hacksyon.models.Candidate;
@@ -77,7 +79,13 @@ public class PresidentiablesFragment extends Fragment {
             candidates.add(p.getObject());
         }
 
-        CandidateRecyclerViewAdapter candidateRecyclerViewAdapter = new CandidateRecyclerViewAdapter(mContext, candidates);
+        CandidateRecyclerViewAdapter candidateRecyclerViewAdapter = new CandidateRecyclerViewAdapter(mContext, candidates) {
+            @Override
+            public void onCandidateClicked(Candidate candidate) {
+                Intent intent = CandidateDetailsActivity.newIntent(mContext, candidate);
+                startActivity(intent);
+            }
+        };
         mRecyclerView.setAdapter(candidateRecyclerViewAdapter);
     }
 

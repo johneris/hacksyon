@@ -59,6 +59,9 @@
         <activity android:name=".activities.ChatbotTopicListActivity"
             android:label="Topic List"/>
 
+        <activity android:name=".activities.ChoosePresidentActivity"
+                  android:label="Choose Your President"/>
+
     </application>
 
 </manifest>

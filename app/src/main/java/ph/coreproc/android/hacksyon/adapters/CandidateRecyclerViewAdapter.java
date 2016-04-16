@@ -1,7 +1,6 @@
 package ph.coreproc.android.hacksyon.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ph.coreproc.android.hacksyon.R;
-import ph.coreproc.android.hacksyon.activities.CandidateDetailsActivity;
 import ph.coreproc.android.hacksyon.models.Candidate;
 
 /**
  * Created by johneris on 6/8/2015.
  */
-public class CandidateRecyclerViewAdapter extends RecyclerView.Adapter<CandidateRecyclerViewAdapter.CandidateViewHolder> {
+public abstract class CandidateRecyclerViewAdapter extends RecyclerView.Adapter<CandidateRecyclerViewAdapter.CandidateViewHolder> {
 
     List<Candidate> mCandidates;
     private Context mContext;
+
+    public abstract void onCandidateClicked(Candidate candidate);
 
     public CandidateRecyclerViewAdapter(Context context, List<Candidate> candidates) {
         mContext = context;
@@ -48,8 +48,7 @@ public class CandidateRecyclerViewAdapter extends RecyclerView.Adapter<Candidate
         holder.mMainContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = CandidateDetailsActivity.newIntent(mContext, candidate);
-                mContext.startActivity(intent);
+                onCandidateClicked(candidate);
             }
         });
     }

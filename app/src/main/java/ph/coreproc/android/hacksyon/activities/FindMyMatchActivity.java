@@ -3,9 +3,12 @@ package ph.coreproc.android.hacksyon.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.solovyev.android.views.llm.LinearLayoutManager;
@@ -18,6 +21,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ph.coreproc.android.hacksyon.R;
 import ph.coreproc.android.hacksyon.adapters.IssueRecyclerViewAdapter;
 import ph.coreproc.android.hacksyon.data.Issues;
+import ph.coreproc.android.hacksyon.data.presidentiables.PresidentiableEnum;
+import ph.coreproc.android.hacksyon.models.Candidate;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
 import ph.coreproc.android.hacksyon.rest.RestClient;
 import retrofit.Callback;
@@ -35,6 +40,7 @@ public class FindMyMatchActivity extends BaseActivity {
     }
 
     private final int REQUEST_CODE_ISSUE_CANDIDATE = 1;
+    private final int REQUEST_CODE_CHOOSE_CANDIDATE_TO_VOTE = 2;
 
     @Bind(R.id.matchCandidateBackgroundImageView)
     CircleImageView mMatchCandidateBackgroundImageView;
@@ -57,6 +63,12 @@ public class FindMyMatchActivity extends BaseActivity {
     @Bind(R.id.issuesRecyclerView)
     RecyclerView mIssuesRecyclerView;
 
+    @Bind(R.id.myMatchContainer)
+    LinearLayout mMyMatchContainer;
+
+    @Bind(R.id.myVoteContainer)
+    LinearLayout mMyVoteContainer;
+
     IssueRecyclerViewAdapter mIssueRecyclerViewAdapter;
 
     @Override
@@ -70,7 +82,6 @@ public class FindMyMatchActivity extends BaseActivity {
 
         initUI();
     }
-
 
 
     private void initUI() {
@@ -92,6 +103,14 @@ public class FindMyMatchActivity extends BaseActivity {
             }
         };
         mIssuesRecyclerView.setAdapter(mIssueRecyclerViewAdapter);
+
+        mChangeVoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChoosePresidentActivity.newIntent(mContext);
+                startActivityForResult(intent, REQUEST_CODE_CHOOSE_CANDIDATE_TO_VOTE);
+            }
+        });
 
         getData();
     }
@@ -124,6 +143,22 @@ public class FindMyMatchActivity extends BaseActivity {
             String issueId = bundle.getString(IssueCandidateMatchActivity.RESULT_ISSUE_ID);
             int rating = bundle.getInt(IssueCandidateMatchActivity.RESULT_RATING, 0);
             String candidateId = bundle.getString(IssueCandidateMatchActivity.RESULT_CANDIDATE_ID);
+        } else if (requestCode == REQUEST_CODE_CHOOSE_CANDIDATE_TO_VOTE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            int candidateId = bundle.getInt(ChoosePresidentActivity.RESULT_CANDIDATE_ID);
+            Candidate candidate =  null;
+            for (PresidentiableEnum p : PresidentiableEnum.values()) {
+                if (p.getObject().getId() == candidateId) {
+                    candidate = p.getObject();
+                    break;
+                }
+            }
+            if (candidate != null) {
+                mMyVoteContainer.setBackgroundColor(ContextCompat.getColor(mContext, candidate.getColor()));
+                mVoteBackgroundImageView.setImageResource(candidate.getColor());
+                mVoteImageView.setImageResource(candidate.getImage());
+                // set object candidate to vote
+            }
         }
     }
 

@@ -11,9 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import ph.coreproc.android.hacksyon.R;
@@ -42,6 +46,9 @@ public class HomeActivity extends BaseActivity {
 
     // include_home_content
 
+    @Bind(R.id.daysLeftTextView)
+    TextView mDaysLeftTextView;
+
     @Bind(R.id.candidatesButton)
     LinearLayout mCandidatesButton;
 
@@ -69,6 +76,15 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initUI() {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        calendar.set(2016, 4, 9);
+        Date electionDate = calendar.getTime();
+
+        int daysBeforeElection = daysDifference(new DateTime(today), new DateTime(electionDate));
+
+        mDaysLeftTextView.setText(daysBeforeElection + "");
+
         mSunImageView.setColorFilter(ContextCompat.getColor(mContext, R.color.independent_light));
         mCollapsingToolbar.setTitle(getResources().getString(R.string.app_name));
 
@@ -95,6 +111,10 @@ public class HomeActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public int daysDifference(DateTime date1, DateTime date2) {
+        return Days.daysBetween(date1, date2).getDays();
     }
 
 

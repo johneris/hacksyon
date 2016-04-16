@@ -66,4 +66,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     // LinearLayoutManager
     compile 'org.solovyev.android.views:linear-layout-manager:0.5@aar'
+    // Joda Time
+    compile 'net.danlew:android.joda:2.9.2'
 }

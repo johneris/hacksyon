@@ -10,5 +10,16 @@
         <item name="android:background">@drawable/button_danger</item>
         <item name="android:textColor">@color/button_danger_text</item>
     </style>
-    
+
+    <style name="Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#FFF</item>
+    </style>
+    <style name="Title.Expanded" parent="Title">
+        <item name="android:textSize">32sp</item>
+    </style>
+    <style name="Title.collapsed" parent="Title">
+        <item name="android:textSize">@dimen/abc_text_size_title_material_toolbar</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

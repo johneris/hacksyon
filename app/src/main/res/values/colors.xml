@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary">#2196F3</color>           <!-- color of toolbar -->
-    <color name="primary_dark">#1976D2</color>      <!-- color of status bar -->
-    <color name="primary_light">#BBDEFB</color>
+    <color name="primary">#3F51B5</color>           <!-- color of toolbar -->
+    <color name="primary_dark">#283593</color>      <!-- color of status bar -->
+    <color name="primary_light">#5C6BC0</color>
     <color name="accent">#009688</color>            <!-- tint of views -->
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#727272</color>
     <color name="divider">#B6B6B6</color>
     <color name="text_icon">#FFFFFF</color>
+
+    <color name="flag_red">#E71600</color>
+    <color name="flag_blue">#100EFF</color>
+
+    <color name="button_candidates_color">#43A047</color>
+    <color name="button_findmymatch_color">#F44336</color>
+    <color name="button_chatbot_color">#795548</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
     <color name="button_primary_background">@color/primary</color>
     <color name="button_primary_background_pressed">@color/primary_dark</color>

@@ -14,8 +14,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = DrawerActivity.newIntent(mContext);
+        Intent intent = HomeActivity.newIntent(mContext);
         startActivity(intent);
+        finish();
     }
 
     @Override

@@ -13,18 +13,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <!--ActiveAndroid-->
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="example.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
-        <meta-data
-            android:name="AA_MODELS"
-            android:value="ph.coreproc.android.kitchenmaterial.models.Contributor" />
-        <!--ActiveAndroid-->
-
         <activity
             android:name="ph.coreproc.android.hacksyon.activities.MainActivity"
             android:label="@string/app_name"
@@ -45,7 +33,7 @@
             android:label="@string/activity_title_login"
             android:screenOrientation="portrait"/>
 
-        <activity android:name="ph.coreproc.android.hacksyon.activities.DrawerActivity"/>
+        <activity android:name="ph.coreproc.android.hacksyon.activities.HomeActivity"/>
 
     </application>
 

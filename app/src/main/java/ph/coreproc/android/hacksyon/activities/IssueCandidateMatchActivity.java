@@ -10,9 +10,21 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.solovyev.android.views.llm.LinearLayoutManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import ph.coreproc.android.hacksyon.R;
+import ph.coreproc.android.hacksyon.adapters.CandidateStandRecyclerViewAdapter;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
+import ph.coreproc.android.hacksyon.models.StandOnIssueResponseModel;
+import ph.coreproc.android.hacksyon.rest.RestClient;
+import ph.coreproc.android.hacksyon.utils.DividerItemDecoration;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by johneris on 4/16/16.
@@ -47,9 +59,13 @@ public class IssueCandidateMatchActivity extends BaseActivity {
     @Bind(R.id.doneButton)
     Button mDoneButton;
 
+    private CandidateStandRecyclerViewAdapter mCandidateStandRecyclerViewAdapter;
+
     private String mIssueId;
     private String mIssue;
     private int mIssueRating;
+
+    private StandOnIssueResponseModel mStandOnIssueResponseModel;
 
     @Override
     protected int getLayoutResourceId() {
@@ -73,15 +89,56 @@ public class IssueCandidateMatchActivity extends BaseActivity {
         mIssueTextView.setText(mIssue);
         mRatingBar.setRating(mIssueRating);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mCandidateQuoteRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mCandidateQuoteRecyclerView.setNestedScrollingEnabled(false);
+        mCandidateQuoteRecyclerView.setHasFixedSize(false);
+
+        mCandidateQuoteRecyclerView.addItemDecoration(
+                new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST)
+        );
+
+        List<StandOnIssueResponseModel> standOnIssueResponseModels = new ArrayList<>();
+
+        mCandidateStandRecyclerViewAdapter = new CandidateStandRecyclerViewAdapter(mContext, standOnIssueResponseModels) {
+            @Override
+            public void onStandOnIssueClicked(StandOnIssueResponseModel standOnIssueResponseModel) {
+                mStandOnIssueResponseModel = standOnIssueResponseModel;
+            }
+        };
+        mCandidateQuoteRecyclerView.setAdapter(mCandidateStandRecyclerViewAdapter);
+
+
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mStandOnIssueResponseModel == null) {
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.putExtra(RESULT_ISSUE_ID, mIssueId);
                 intent.putExtra(RESULT_RATING, mRatingBar.getNumStars());
-                intent.putExtra(RESULT_CANDIDATE_ID, "1");
+                intent.putExtra(RESULT_CANDIDATE_ID, mStandOnIssueResponseModel.candidateId);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        loadStandOnIssue();
+    }
+
+    private void loadStandOnIssue() {
+        RestClient.switchToLocalMode();
+        RestClient.getAPIService().getCandidateStandOnIssue(Integer.parseInt(mIssueId), new Callback<List<StandOnIssueResponseModel>>() {
+            @Override
+            public void success(List<StandOnIssueResponseModel> standOnIssueResponseModels, Response response) {
+                mCandidateStandRecyclerViewAdapter.changeData(standOnIssueResponseModels);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }

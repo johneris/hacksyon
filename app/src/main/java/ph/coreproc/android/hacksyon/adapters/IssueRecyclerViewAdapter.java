@@ -67,6 +67,10 @@ public abstract class IssueRecyclerViewAdapter extends RecyclerView.Adapter<Issu
         notifyDataSetChanged();
     }
 
+    public List<IssueResponseModel> getIssueResponseModels() {
+        return mIssueResponseModels;
+    }
+
     public static class IssueViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.issueTextView)

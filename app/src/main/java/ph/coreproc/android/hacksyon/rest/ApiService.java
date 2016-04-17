@@ -48,6 +48,12 @@ public interface ApiService {
             Callback<List<StandOnIssueResponseModel>> callback
     );
 
+    @GET("/stand/{id}")
+    void getCandidateStandOnIssue(
+            @Path("id") int id,
+            Callback<List<StandOnIssueResponseModel>> callback
+    );
+
     @GET("/issues")
     void getIssues(
             @Query("key") String key,

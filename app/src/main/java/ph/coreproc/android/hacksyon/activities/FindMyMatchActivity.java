@@ -24,6 +24,7 @@ import ph.coreproc.android.hacksyon.data.Issues;
 import ph.coreproc.android.hacksyon.data.presidentiables.PresidentiableEnum;
 import ph.coreproc.android.hacksyon.models.Candidate;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
+import ph.coreproc.android.hacksyon.models.MyMatchModel;
 import ph.coreproc.android.hacksyon.rest.RestClient;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -71,6 +72,8 @@ public class FindMyMatchActivity extends BaseActivity {
 
     IssueRecyclerViewAdapter mIssueRecyclerViewAdapter;
 
+    private MyMatchModel mMyMatchModel;
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_find_my_match;
@@ -80,6 +83,7 @@ public class FindMyMatchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mMyMatchModel = new MyMatchModel();
         initUI();
     }
 
@@ -116,6 +120,7 @@ public class FindMyMatchActivity extends BaseActivity {
     }
 
     private void getData() {
+        RestClient.switchToLiveMode();
         RestClient.getAPIService().getIssues(RestClient.KEY, RestClient.TOKEN, new Callback<List<IssueResponseModel>>() {
             @Override
             public void success(List<IssueResponseModel> issueResponseModels, Response response) {
@@ -134,6 +139,10 @@ public class FindMyMatchActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void updateData() {
+
     }
 
     @Override

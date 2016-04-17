@@ -16,7 +16,7 @@ public class RestClient {
     }
 
     private static final String BASE_URL_LIVE = "http://api.bilangpilipino.com/api-bilang-pilipino/api";
-    private static final String BASE_URL_DEV = "http://api.bilangpilipino.com/api-bilang-pilipino/api";
+    private static final String BASE_URL_LOCAL = "http://192.168.43.122:3000";
     private static BaseUrlMode baseUrlMode;
 
     private static ApiService apiService;
@@ -25,7 +25,7 @@ public class RestClient {
     public static String TOKEN = "ccGwXFv9k9vO68igyXmPRvHiYrgp";
 
     static {
-        setupRestClient(BASE_URL_DEV);
+        setupRestClient(BASE_URL_LOCAL);
     }
 
     private RestClient() {}
@@ -33,7 +33,7 @@ public class RestClient {
     private static void setupRestClient(String baseUrl) {
         if(baseUrl.equals(BASE_URL_LIVE)) {
             baseUrlMode = BaseUrlMode.LIVE;
-        } else if(baseUrl.equals(BASE_URL_DEV)) {
+        } else if(baseUrl.equals(BASE_URL_LOCAL)) {
             baseUrlMode = BaseUrlMode.DEV;
         }
 
@@ -51,8 +51,8 @@ public class RestClient {
         apiService = restAdapter.create(ApiService.class);
     }
 
-    public static void switchToDevMode() {
-        setupRestClient(BASE_URL_DEV);
+    public static void switchToLocalMode() {
+        setupRestClient(BASE_URL_LOCAL);
     }
 
     public static void switchToLiveMode() {

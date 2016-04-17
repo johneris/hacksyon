@@ -43,6 +43,30 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:text="OFW"/>
 
+        <Button
+            android:id="@+id/corruptionButton"
+            style="@style/Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="Corruption"/>
+
+        <Button
+            android:id="@+id/drugsButton"
+            style="@style/Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="Illegal Drugs"/>
+
+        <Button
+            android:id="@+id/crimeButton"
+            style="@style/Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="Crime and Delinquency"/>
+
     </LinearLayout>
 
 </LinearLayout>

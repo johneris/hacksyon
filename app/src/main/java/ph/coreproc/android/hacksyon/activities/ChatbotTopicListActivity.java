@@ -37,6 +37,15 @@ public class ChatbotTopicListActivity extends BaseActivity {
     @Bind(R.id.ofwButton)
     Button mOfwButton;
 
+    @Bind(R.id.corruptionButton)
+    Button mCorruptionButton;
+
+    @Bind(R.id.drugsButton)
+    Button mDrugsButton;
+
+    @Bind(R.id.crimeButton)
+    Button mCrimeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +76,30 @@ public class ChatbotTopicListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = ChatbotDiscussActivity.newIntent(mContext, "OFW", getOFWMessages());
+                startActivity(intent);
+            }
+        });
+
+        mCorruptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChatbotDiscussActivity.newIntent(mContext, "Corruption", getCorruptionMessages());
+                startActivity(intent);
+            }
+        });
+
+        mDrugsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChatbotDiscussActivity.newIntent(mContext, "Illegal Drugs", getDrugsMessages());
+                startActivity(intent);
+            }
+        });
+
+        mCrimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChatbotDiscussActivity.newIntent(mContext, "Crime and Delinquency", getCrimeMessages());
                 startActivity(intent);
             }
         });
@@ -124,6 +157,37 @@ public class ChatbotTopicListActivity extends BaseActivity {
                 "<br><br>Source: <a href='https://psa.gov.ph/sites/default/files/attachments/hsd/article/TABLE%201.4%20%20Distribution%20of%20Overseas%20Filipino%20Workers%20by%20Major%20Occupation%20Group%2C%20Sex%20and%20Area%20%202014.pdf'>Philippine Statistics Authority</a>");
         messages.add("56% of OFWs work in the Western Asia: Saudi Arabia (25%), United  Arab Emirates (16%), Kuwait (5%), Qatar (5%), and other countries in Westen Asia such as Bahrain, Israel, Lebanon and Jordan (5%)" +
                 "<br><br>Source: <a href='https://psa.gov.ph/sites/default/files/attachments/hsd/article/TABLE%201.4%20%20Distribution%20of%20Overseas%20Filipino%20Workers%20by%20Major%20Occupation%20Group%2C%20Sex%20and%20Area%20%202014.pdf'>Philippine Statistics Authority</a>");
+        return messages;
+    }
+
+    private List<String> getCorruptionMessages() {
+        List<String> messages = new ArrayList<>();
+        messages.add("Corruption Perceptions Index (CPI) is a measure of how corrupt a country is. It measures the perceived levels of public sector corruption, as determined by expert assessments and opinion surveys. The CPI is on a scale of 0 - 10, where 0 means that a country is perceived as highly corrupt and 10 means that a country is perceived as very clean." +
+                "<br><br>Source: <a href='http://www.transparency.org/cpi2015'>Transparency International</a>");
+        messages.add("In 2009 the Philippines ranked 141st among 180 countries included in the index with 2.3 CPI. In 2014 this greatly improved as Philippines ranked 95th out of 186 countries. The nation scored 3.8 in the CPI index, compared to 2.3 in 2009." +
+                "<br><br>Source: <a href='http://www.transparency.org/research/cpi/overview'>Transparency International</a>");
+        return messages;
+    }
+
+    private List<String> getDrugsMessages() {
+        List<String> messages = new ArrayList<>();
+        messages.add("In 2015, around one-fifth of barangays (or villages) or more than 8,629 out of the 42,065 barangays in the Philippines have drug-related cases." +
+                "<br><br>Source: <a href='http://www.philstar.com/nation/2015/02/19/1425462/pdea-92-metro-manila-barangays-drug-affected'>The Philippine Star</a>");
+        messages.add("Metro Manila has the highest rate of being drug-affected with 92.10 % of the region’s barangays affected, followed by Region 4A (Southern Tagalog) at 33.78 %." +
+                "<br><br>Source: <a href='http://www.philstar.com/nation/2015/02/19/1425462/pdea-92-metro-manila-barangays-drug-affected'>The Philippine Star</a>");
+        messages.add("Shabu (methamphetamine hydrochloride) and marijuana are the most abused illegal drugs in the Philippines. Based on 2014 arrest data, 88.78 % involved the seizure of shabu, while 8.86 % covered the confiscation of marijuana. Dangerous drugs such as cocaine, ecstasy, ephedrine, 'fly-high' and others constitute the 2.36% of the drug-related arrests" +
+                "<br><br>Source: <a href='http://www.philstar.com/nation/2015/02/19/1425462/pdea-92-metro-manila-barangays-drug-affected'>The Philippine Star</a>");
+        return messages;
+    }
+
+    private List<String> getCrimeMessages() {
+        List<String> messages = new ArrayList<>();
+        messages.add("In 2014 and 2013, the total number of reported crimes was 1.2 million and 1 million respectively. In 2012, only 218,000 crimes were reported." +
+                "<br><br>Source: <a href='https://psa.gov.ph/sites/default/files/2015%20PIF_0.pdf'>Philippine Statistics Authority</a>");
+        messages.add("The number of index crimes (crimes against persons and properties) – like murder, rape, robbery, and carnapping – has been increasing, from 129,000 index crimes in 2012  to 458,000 in 2013, and 493,000 in 2014." +
+                "<br><br>Source: <a href='https://psa.gov.ph/sites/default/files/2015%20PIF_0.pdf'>Philippine Statistics Authority</a>");
+        messages.add("Crime solution efficiency, or the percentage of solved crimes out of reported crimes, was only 37 % and 29 for year 2012 and 2013 respectively. This is significantly low compared to 89 % in 2006 and 88 % in 2007." +
+                "<br><br>Source: <a href='https://psa.gov.ph/sites/default/files/pif_2009.pdf'>Philippine Statistics Authority</a>");
         return messages;
     }
 

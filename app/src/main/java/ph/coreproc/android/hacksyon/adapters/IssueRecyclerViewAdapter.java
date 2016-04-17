@@ -1,6 +1,7 @@
 package ph.coreproc.android.hacksyon.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,22 @@ public abstract class IssueRecyclerViewAdapter extends RecyclerView.Adapter<Issu
     public void onBindViewHolder(IssueViewHolder holder, int position) {
         final IssueResponseModel issueResponseModel = mIssueResponseModels.get(position);
         holder.mIssueTextView.setText(issueResponseModel.shortName);
-        holder.mResultContainer.setVisibility(View.GONE);
+
+        if (issueResponseModel.candidate != null) {
+            holder.mCandidateBackgroundImageView.setImageResource(issueResponseModel.candidate.getColor());
+            holder.mCandidateImageView.setImageResource(issueResponseModel.candidate.getImage());
+            holder.mResultContainer.setBackgroundColor(ContextCompat.getColor(mContext, issueResponseModel.candidate.getColor()));
+            holder.mResultContainer.setVisibility(View.VISIBLE);
+        } else {
+            holder.mResultContainer.setVisibility(View.GONE);
+        }
+
+        if (issueResponseModel.quote != null) {
+            holder.mQuoteTextView.setText(issueResponseModel.quote);
+        }
+
+        holder.mRatingBar.setRating(issueResponseModel.rating);
+
         holder.mMainContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

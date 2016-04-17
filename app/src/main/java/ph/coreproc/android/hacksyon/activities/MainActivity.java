@@ -10,6 +10,7 @@ import java.util.List;
 import ph.coreproc.android.hacksyon.R;
 import ph.coreproc.android.hacksyon.models.StandOnIssueResponseModel;
 import ph.coreproc.android.hacksyon.rest.RestClient;
+import ph.coreproc.android.hacksyon.utils.Preferences;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -25,8 +26,14 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = HomeActivity.newIntent(mContext);
-        startActivity(intent);
+        if (Preferences.getFirstStart(mContext)) {
+            Intent intent = ChatbotRegisterActivity.newIntent(mContext);
+            startActivity(intent);
+        } else {
+            Intent intent = HomeActivity.newIntent(mContext);
+            startActivity(intent);
+        }
+
         finish();
 
 //        for (PresidentiableEnum p : PresidentiableEnum.values()) {

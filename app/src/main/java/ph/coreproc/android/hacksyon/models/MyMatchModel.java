@@ -40,6 +40,10 @@ public class MyMatchModel {
         @Expose
         public String candidateId;
 
+        @SerializedName("quote")
+        @Expose
+        public String quote;
+
     }
 
 }

@@ -21,7 +21,6 @@ import ph.coreproc.android.hacksyon.adapters.CandidateStandRecyclerViewAdapter;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
 import ph.coreproc.android.hacksyon.models.StandOnIssueResponseModel;
 import ph.coreproc.android.hacksyon.rest.RestClient;
-import ph.coreproc.android.hacksyon.utils.DividerItemDecoration;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -38,6 +37,7 @@ public class IssueCandidateMatchActivity extends BaseActivity {
     public static String RESULT_ISSUE_ID = "RESULT_ISSUE_ID";
     public static String RESULT_RATING = "RESULT_RATING";
     public static String RESULT_CANDIDATE_ID = "RESULT_CANDIDATE_ID";
+    public static String RESULT_QUOTE= "RESULT_QUOTE";
 
     public static Intent newIntent(Context context, IssueResponseModel issueResponseModel) {
         Intent intent = new Intent(context, IssueCandidateMatchActivity.class);
@@ -95,10 +95,6 @@ public class IssueCandidateMatchActivity extends BaseActivity {
         mCandidateQuoteRecyclerView.setNestedScrollingEnabled(false);
         mCandidateQuoteRecyclerView.setHasFixedSize(false);
 
-        mCandidateQuoteRecyclerView.addItemDecoration(
-                new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST)
-        );
-
         List<StandOnIssueResponseModel> standOnIssueResponseModels = new ArrayList<>();
 
         mCandidateStandRecyclerViewAdapter = new CandidateStandRecyclerViewAdapter(mContext, standOnIssueResponseModels) {
@@ -118,8 +114,9 @@ public class IssueCandidateMatchActivity extends BaseActivity {
                 }
                 Intent intent = new Intent();
                 intent.putExtra(RESULT_ISSUE_ID, mIssueId);
-                intent.putExtra(RESULT_RATING, mRatingBar.getNumStars());
+                intent.putExtra(RESULT_RATING, Math.round(mRatingBar.getRating()));
                 intent.putExtra(RESULT_CANDIDATE_ID, mStandOnIssueResponseModel.candidateId);
+                intent.putExtra(RESULT_QUOTE, mStandOnIssueResponseModel.quote);
                 setResult(RESULT_OK, intent);
                 finish();
             }

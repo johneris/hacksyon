@@ -1,78 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/mainContainer"
+
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:orientation="vertical"
-    android:padding="@dimen/spacing_small">
+    android:layout_marginBottom="@dimen/spacing_small"
+    android:layout_marginLeft="@dimen/spacing_small"
+    android:layout_marginRight="@dimen/spacing_small">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/okImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="left"
-            android:src="@drawable/ic_agree"/>
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
 
         <FrameLayout
-            android:id="@+id/summaryContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:padding="@dimen/spacing_xsmall"
-            tools:background="@drawable/bg_yes">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/summaryTextView"
+            <ImageView
+                android:id="@+id/okImageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="left"
+                android:src="@drawable/ic_agree"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="YES"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold"/>
+                android:layout_gravity="right"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:gravity="center_vertical"
+                    android:text="Summary"/>
+
+                <FrameLayout
+                    android:id="@+id/summaryContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_xsmall"
+                    tools:background="@drawable/bg_yes">
+
+                    <TextView
+                        android:id="@+id/summaryTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="YES"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
 
         </FrameLayout>
 
-    </FrameLayout>
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:minHeight="48dp">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="left|top"
-            android:src="@drawable/ic_quotation_mark_left"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="right|bottom"
-            android:src="@drawable/ic_quotation_mark_right"/>
-
-        <TextView
-            android:id="@+id/textViewMessage"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/spacing_medium"
-            android:layout_marginRight="@dimen/spacing_medium"
-            android:gravity="center"
-            android:text=""
-            android:textSize="18sp"
-            android:textStyle="italic"/>
+            android:layout_marginTop="@dimen/spacing_small"
+            android:minHeight="48dp">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="left|top"
+                android:src="@drawable/ic_quotation_mark_left"/>
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="right|bottom"
+                android:src="@drawable/ic_quotation_mark_right"/>
+
+            <TextView
+                android:id="@+id/textViewMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:gravity="center"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="italic"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

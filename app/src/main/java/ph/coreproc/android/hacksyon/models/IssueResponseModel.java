@@ -20,4 +20,10 @@ public class IssueResponseModel {
     @Expose
     public String shortName;
 
+    public Candidate candidate;
+
+    public int rating;
+
+    public String quote;
+
 }

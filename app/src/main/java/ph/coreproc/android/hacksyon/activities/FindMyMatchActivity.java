@@ -14,7 +14,9 @@ import android.widget.TextView;
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,6 +28,7 @@ import ph.coreproc.android.hacksyon.models.Candidate;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
 import ph.coreproc.android.hacksyon.models.MyMatchModel;
 import ph.coreproc.android.hacksyon.rest.RestClient;
+import ph.coreproc.android.hacksyon.utils.Preferences;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -83,7 +86,7 @@ public class FindMyMatchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMyMatchModel = new MyMatchModel();
+        mMyMatchModel = Preferences.getMyMatchModel(mContext);
         initUI();
     }
 
@@ -132,6 +135,8 @@ public class FindMyMatchActivity extends BaseActivity {
                     }
                 }
                 mIssueRecyclerViewAdapter.changeData(issueResponseModelsFiltered);
+
+                loadData();
             }
 
             @Override
@@ -141,8 +146,117 @@ public class FindMyMatchActivity extends BaseActivity {
         });
     }
 
-    private void updateData() {
+    private void loadData() {
+        if (mMyMatchModel == null) {
+            return;
+        }
 
+        String candidateIdMatch = mMyMatchModel.candidateIdMatch;
+        String candidateIdVote = mMyMatchModel.candicateIdVote;
+        Candidate candidateMatch = null;
+        Candidate candidateVote = null;
+        for (PresidentiableEnum p : PresidentiableEnum.values()) {
+            if ((p.getObject().getId() + "").equals(candidateIdMatch)) {
+                candidateMatch = p.getObject();
+            }
+            if ((p.getObject().getId() + "").equals(candidateIdVote)) {
+                candidateVote = p.getObject();
+            }
+        }
+        if (candidateMatch != null) {
+            mMyMatchContainer.setBackgroundColor(ContextCompat.getColor(mContext, candidateMatch.getColor()));
+            mMatchCandidateBackgroundImageView.setImageResource(candidateMatch.getColor());
+            mMatchCandidateImageView.setImageResource(candidateMatch.getImage());
+            mMatchScoreTextView.setText("" + mMyMatchModel.matchScore);
+        }
+        if (candidateVote != null) {
+            mMyVoteContainer.setBackgroundColor(ContextCompat.getColor(mContext, candidateVote.getColor()));
+            mVoteBackgroundImageView.setImageResource(candidateVote.getColor());
+            mVoteImageView.setImageResource(candidateVote.getImage());
+        }
+
+        List<IssueResponseModel> issueResponseModels = mIssueRecyclerViewAdapter.getIssueResponseModels();
+        for (IssueResponseModel issueResponseModel : issueResponseModels) {
+            MyMatchModel.IssueResult issueResult = getIssueResult(issueResponseModel.id);
+            if (issueResult != null) {
+                issueResponseModel.quote = issueResult.quote;
+                issueResponseModel.candidate = getPresidentialCandidateById(Integer.parseInt(issueResult.candidateId));
+                issueResponseModel.rating = issueResult.rating;
+            }
+        }
+        mIssueRecyclerViewAdapter.changeData(issueResponseModels);
+    }
+
+    private void updateAndSaveData() {
+        Map<Integer, Integer> mapCandidateScore = new HashMap<>();
+        List<IssueResponseModel> issueResponseModels = mIssueRecyclerViewAdapter.getIssueResponseModels();
+        List<MyMatchModel.IssueResult> issueResults = new ArrayList<>();
+        for (IssueResponseModel issueResponseModel : issueResponseModels) {
+            MyMatchModel.IssueResult issueResult = new MyMatchModel.IssueResult();
+            issueResult.id = issueResponseModel.id;
+            issueResult.candidateId = issueResponseModel.candidate == null ? "-1" : issueResponseModel.candidate.getId() + "";
+            issueResult.quote = issueResponseModel.quote;
+            issueResult.rating = issueResponseModel.rating;
+            issueResults.add(issueResult);
+
+            if (issueResponseModel.candidate == null) {
+                continue;
+            }
+
+            if (mapCandidateScore.containsKey(issueResult.candidateId)) {
+                int score = mapCandidateScore.get(issueResult.candidateId);
+                mapCandidateScore.put(issueResponseModel.candidate.getId(), score + issueResult.rating);
+            } else {
+                mapCandidateScore.put(issueResponseModel.candidate.getId(), issueResult.rating);
+            }
+        }
+
+        int candidateIdMatch = -1;
+        int candidateScore = 0;
+        for (Map.Entry<Integer, Integer> entry : mapCandidateScore.entrySet()) {
+            if (candidateIdMatch == -1) {
+                candidateIdMatch = entry.getKey();
+                candidateScore = entry.getValue();
+                continue;
+            }
+            if (entry.getValue() > candidateScore) {
+                candidateIdMatch = entry.getKey();
+                candidateScore = entry.getValue();
+            }
+        }
+
+        if (mMyMatchModel == null) {
+            mMyMatchModel = new MyMatchModel();
+        }
+
+        mMyMatchModel.candidateIdMatch = candidateIdMatch + "";
+        mMyMatchModel.matchScore = candidateScore;
+        mMyMatchModel.issueResults = issueResults;
+
+        Preferences.setMyMatch(mContext, mMyMatchModel);
+
+        loadData();
+    }
+
+    private Candidate getPresidentialCandidateById(int id) {
+        for (PresidentiableEnum p : PresidentiableEnum.values()) {
+            if (p.getObject().getId() == id) {
+                return p.getObject();
+            }
+        }
+        return null;
+    }
+
+    private MyMatchModel.IssueResult getIssueResult(String issueId) {
+        if (mMyMatchModel == null) {
+            return null;
+        }
+        for (MyMatchModel.IssueResult issueResult : mMyMatchModel.issueResults) {
+            if (issueId.contentEquals(issueResult.id)) {
+                return issueResult;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -150,12 +264,14 @@ public class FindMyMatchActivity extends BaseActivity {
         if (requestCode == REQUEST_CODE_ISSUE_CANDIDATE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             String issueId = bundle.getString(IssueCandidateMatchActivity.RESULT_ISSUE_ID);
-            int rating = bundle.getInt(IssueCandidateMatchActivity.RESULT_RATING, 0);
+            int rating = bundle.getInt(IssueCandidateMatchActivity.RESULT_RATING);
             String candidateId = bundle.getString(IssueCandidateMatchActivity.RESULT_CANDIDATE_ID);
+            String quote = bundle.getString(IssueCandidateMatchActivity.RESULT_QUOTE);
+            updateIssuesRecyclerView(issueId, rating, candidateId, quote);
         } else if (requestCode == REQUEST_CODE_CHOOSE_CANDIDATE_TO_VOTE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             int candidateId = bundle.getInt(ChoosePresidentActivity.RESULT_CANDIDATE_ID);
-            Candidate candidate =  null;
+            Candidate candidate = null;
             for (PresidentiableEnum p : PresidentiableEnum.values()) {
                 if (p.getObject().getId() == candidateId) {
                     candidate = p.getObject();
@@ -166,9 +282,24 @@ public class FindMyMatchActivity extends BaseActivity {
                 mMyVoteContainer.setBackgroundColor(ContextCompat.getColor(mContext, candidate.getColor()));
                 mVoteBackgroundImageView.setImageResource(candidate.getColor());
                 mVoteImageView.setImageResource(candidate.getImage());
-                // set object candidate to vote
+                mMyMatchModel.candicateIdVote = candidate.getId() + "";
+                Preferences.setMyMatch(mContext, mMyMatchModel);
             }
         }
+    }
+
+    private void updateIssuesRecyclerView(String issueId, int rating, String candidateId, String quote) {
+        List<IssueResponseModel> issueResponseModels = mIssueRecyclerViewAdapter.getIssueResponseModels();
+        for (IssueResponseModel issueResponseModel : issueResponseModels) {
+            if (issueId.equals(issueResponseModel.id)) {
+                issueResponseModel.rating = rating;
+                issueResponseModel.candidate = getPresidentialCandidateById(Integer.parseInt(candidateId));
+                issueResponseModel.quote = quote;
+            }
+        }
+        mIssueRecyclerViewAdapter.changeData(issueResponseModels);
+
+        updateAndSaveData();
     }
 
     @Override

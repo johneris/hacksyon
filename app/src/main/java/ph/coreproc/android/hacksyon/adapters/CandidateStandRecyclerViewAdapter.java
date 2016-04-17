@@ -1,6 +1,7 @@
 package ph.coreproc.android.hacksyon.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,11 @@ public abstract class CandidateStandRecyclerViewAdapter extends RecyclerView.Ada
         holder.mSummaryTextView.setText(standOnIssueResponseModel.summary);
         holder.mTextViewMessage.setText(standOnIssueResponseModel.quote);
         holder.mOkImageView.setVisibility(position == selection ? View.VISIBLE : View.GONE);
+        if (position == selection) {
+            holder.mMainContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.independent_light));
+        } else {
+            holder.mMainContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+        }
         holder.mMainContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,15 +1,20 @@
 package ph.coreproc.android.hacksyon.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.gson.JsonObject;
 
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
@@ -152,7 +157,7 @@ public class FindMyMatchActivity extends BaseActivity {
         }
 
         String candidateIdMatch = mMyMatchModel.candidateIdMatch;
-        String candidateIdVote = mMyMatchModel.candicateIdVote;
+        String candidateIdVote = mMyMatchModel.candidateIdVote;
         Candidate candidateMatch = null;
         Candidate candidateVote = null;
         for (PresidentiableEnum p : PresidentiableEnum.values()) {
@@ -282,7 +287,7 @@ public class FindMyMatchActivity extends BaseActivity {
                 mMyVoteContainer.setBackgroundColor(ContextCompat.getColor(mContext, candidate.getColor()));
                 mVoteBackgroundImageView.setImageResource(candidate.getColor());
                 mVoteImageView.setImageResource(candidate.getImage());
-                mMyMatchModel.candicateIdVote = candidate.getId() + "";
+                mMyMatchModel.candidateIdVote = candidate.getId() + "";
                 Preferences.setMyMatch(mContext, mMyMatchModel);
             }
         }
@@ -302,11 +307,62 @@ public class FindMyMatchActivity extends BaseActivity {
         updateAndSaveData();
     }
 
+    private void postResult() {
+        updateAndSaveData();
+        RestClient.switchToLocalMode();
+        RestClient.getAPIService().postResult(mMyMatchModel, new Callback<JsonObject>() {
+            @Override
+            public void success(JsonObject jsonObject, Response response) {
+                AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                        .setTitle("Success")
+                        .setMessage("Thank you for participating! " +
+                                "You can visit the overall results online at http://192.168.43.122:3000")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                alertDialog.show();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    private boolean isReadyForPostResult() {
+        if (mMyMatchModel == null) {
+            return false;
+        }
+        List<IssueResponseModel> issueResponseModels = mIssueRecyclerViewAdapter.getIssueResponseModels();
+        for (IssueResponseModel issueResponseModel : issueResponseModels) {
+            if (issueResponseModel.candidate == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_find_my_match, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.postResult:
+                if (isReadyForPostResult()) {
+                    postResult();
+                }
                 return true;
         }
         return false;

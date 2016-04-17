@@ -1,12 +1,17 @@
 package ph.coreproc.android.hacksyon.rest;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import ph.coreproc.android.hacksyon.models.Contributor;
 import ph.coreproc.android.hacksyon.models.IssueResponseModel;
+import ph.coreproc.android.hacksyon.models.MyMatchModel;
 import ph.coreproc.android.hacksyon.models.StandOnIssueResponseModel;
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -59,6 +64,12 @@ public interface ApiService {
             @Query("key") String key,
             @Query("token") String token,
             Callback<List<IssueResponseModel>> callback
+    );
+
+    @POST("/result")
+    void postResult(
+            @Body MyMatchModel myMatchModel,
+            Callback<JsonObject> callback
     );
 
 }

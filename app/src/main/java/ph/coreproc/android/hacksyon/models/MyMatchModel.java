@@ -18,9 +18,9 @@ public class MyMatchModel {
     @Expose
     public String candidateIdMatch;
 
-    @SerializedName("candicate_id_vote")
+    @SerializedName("candidate_id_vote")
     @Expose
-    public String candicateIdVote;
+    public String candidateIdVote;
 
     @SerializedName("issue_results")
     @Expose

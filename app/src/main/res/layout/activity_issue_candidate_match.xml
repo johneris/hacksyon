@@ -43,7 +43,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/spacing_medium"
         android:gravity="center"
-        android:text="Which candidate best matches your stand?"
+        android:text="Which statement best matches your view?"
         android:textStyle="italic"/>
 
     <android.support.v7.widget.RecyclerView

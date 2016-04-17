@@ -1,8 +1,10 @@
 package ph.coreproc.android.hacksyon.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +46,7 @@ public class IssueCandidateMatchActivity extends BaseActivity {
         Intent intent = new Intent(context, IssueCandidateMatchActivity.class);
         intent.putExtra(ARGS_ISSUE_ID, issueResponseModel.id);
         intent.putExtra(ARGS_ISSUE, issueResponseModel.issue);
-        intent.putExtra(ARGS_ISSUE_RATING, 0);
+        intent.putExtra(ARGS_ISSUE_RATING, issueResponseModel.rating);
         return intent;
     }
 
@@ -110,7 +112,26 @@ public class IssueCandidateMatchActivity extends BaseActivity {
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String errorMessage = "";
                 if (mStandOnIssueResponseModel == null) {
+                    errorMessage = "Please select the statement which best matches your view.";
+                }
+                if (Math.round(mRatingBar.getRating()) <= 0) {
+                    errorMessage = errorMessage.isEmpty() ? "Please rate the importance of the issue for you." :
+                            errorMessage + "Please rate the importance of the issue for you.";
+                }
+                if (!errorMessage.isEmpty()) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                            .setTitle("Invalid Input")
+                            .setMessage(errorMessage)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create();
+                    alertDialog.show();
                     return;
                 }
                 Intent intent = new Intent();

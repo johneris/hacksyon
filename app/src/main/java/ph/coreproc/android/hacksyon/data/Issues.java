@@ -22,7 +22,6 @@ public class Issues {
         data.add("8");
         data.add("9");
         data.add("10");
-        data.add("11");
         data.add("14");
         data.add("15");
         data.add("16");

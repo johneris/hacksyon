@@ -203,8 +203,8 @@ public class FindMyMatchActivity extends BaseActivity {
                 continue;
             }
 
-            if (mapCandidateScore.containsKey(issueResult.candidateId)) {
-                int score = mapCandidateScore.get(issueResult.candidateId);
+            if (mapCandidateScore.containsKey(issueResponseModel.candidate.getId())) {
+                int score = mapCandidateScore.get(issueResponseModel.candidate.getId());
                 mapCandidateScore.put(issueResponseModel.candidate.getId(), score + issueResult.rating);
             } else {
                 mapCandidateScore.put(issueResponseModel.candidate.getId(), issueResult.rating);

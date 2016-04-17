@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -130,6 +131,7 @@ public class IssueCandidateMatchActivity extends BaseActivity {
         RestClient.getAPIService().getCandidateStandOnIssue(Integer.parseInt(mIssueId), new Callback<List<StandOnIssueResponseModel>>() {
             @Override
             public void success(List<StandOnIssueResponseModel> standOnIssueResponseModels, Response response) {
+                Collections.shuffle(standOnIssueResponseModels);
                 mCandidateStandRecyclerViewAdapter.changeData(standOnIssueResponseModels);
             }
 

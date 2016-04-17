@@ -35,7 +35,7 @@ public class RoxasCandidate implements Candidate {
 
     @Override
     public String getDescription() {
-        return "";
+        return "Former Secretary of DILG";
     }
 
     @Override

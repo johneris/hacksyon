@@ -35,7 +35,7 @@ public class CayetanoCandidate implements Candidate {
 
     @Override
     public String getDescription() {
-        return "";
+        return "Senator";
     }
 
     @Override

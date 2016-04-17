@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_xsmall"
-                        android:text="ChatBot"
+                        android:text="Know the current state of national issues in an interactive way."
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="italic"/>
